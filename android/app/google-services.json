@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1018553108194",
+    "firebase_url": "https://myiothome-d3d7c.firebaseio.com",
+    "project_id": "myiothome-d3d7c",
+    "storage_bucket": "myiothome-d3d7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018553108194:android:f38e4651f455226fbe80bb",
+        "android_client_info": {
+          "package_name": "com.example.my_iot_home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018553108194-bmdlmv8p5teum423hiqark5eesvaneoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFvP5QOtNI0V9CQ3VH5a-p1KTb0gMHw-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018553108194-bmdlmv8p5teum423hiqark5eesvaneoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
