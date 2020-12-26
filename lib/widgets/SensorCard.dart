@@ -20,54 +20,63 @@ class SensorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 14),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide(color: Colors.blueAccent, width: 2),
+          ),
+          elevation: 5,
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 14),
+            child: Column(
               children: [
-                Icon(
-                  MdiIcons.fromString(sensorIcon),
-                  color: iconColor,
-                  size: 32.0,
-                  semanticLabel: 'Text to announce in accessibility modes',
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      MdiIcons.fromString(sensorIcon),
+                      color: iconColor,
+                      size: 32.0,
+                      semanticLabel: 'Text to announce in accessibility modes',
+                    ),
+                    SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      sensorValue,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        fontFamily: 'Orbitron',
+                        color: valueColor,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 4,
+                  height: 4,
                 ),
-                Text(
-                  sensorValue,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    fontFamily: 'Orbitron',
-                    color: valueColor,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  sensorType,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    fontFamily: 'Comfortaa',
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      sensorType,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                        fontFamily: 'Comfortaa',
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ],
+          ),
         ),
-      ),
+        SizedBox(height: 10),
+      ],
     );
   }
 }
