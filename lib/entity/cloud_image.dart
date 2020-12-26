@@ -7,6 +7,8 @@ class CloudImage {
   var date; //imported String and turned in Date
   String url;
   String dateStr;
+  String DDMMYYYY;
+  String HHMMSS;
 
   //constructor
   CloudImage({@required date, @required url}) {
@@ -25,6 +27,11 @@ class CloudImage {
     var second = int.parse(splittedHourMinuteSecond[2]);
 
     this.date = (DateTime(year, month, day, hour, minute, second));
+
+    this.DDMMYYYY = formatDate(this.date, [dd, ' ', MM, ' ', yyyy]).toString();
+    this.HHMMSS =
+        formatDate(this.date, ['At ', HH, ':', nn, ':', ss]).toString();
+    print('hhmmss: ' + this.HHMMSS);
     this.dateStr = formatDate(
         this.date, [dd, ' ', MM, ' ', yyyy, ' at ', HH, ':', nn, ':', ss]);
     print(dateStr);

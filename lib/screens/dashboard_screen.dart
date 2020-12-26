@@ -1,6 +1,8 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loading/indicator/ball_spin_fade_loader_indicator.dart';
+import 'package:loading/loading.dart';
 import 'package:my_iot_home/entity/sensor.dart';
 import 'package:my_iot_home/screens/Webcam_screen.dart';
 import 'package:my_iot_home/services/push_notification_service.dart';
@@ -37,6 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Dashboard'),
       ),
@@ -131,23 +134,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   )
                                 : Container(),
                             SizedBox(height: 20),
-                            RaisedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  WebcamScreen.route,
-                                );
-                              },
-                              child: const Text('Webcam Images',
-                                  style: TextStyle(
-                                      fontSize: 22, color: Colors.white)),
-                              color: Colors.pinkAccent,
+                            Container(
+                              height: 80,
+                              width: 350,
+                              child: RaisedButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    WebcamScreen.route,
+                                  );
+                                },
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: const Text('Webcam Images',
+                                    style: TextStyle(
+                                        fontSize: 22, color: Colors.white)),
+                                color: Colors.pinkAccent,
+                              ),
                             ),
                           ],
                         ),
                       );
                     } else {
-                      return Center(child: CircularProgressIndicator());
+                      return Center(
+                        child: Loading(
+                          indicator: BallSpinFadeLoaderIndicator(),
+                          size: 30.0,
+                          color: Colors.pinkAccent,
+                        ),
+                      );
                     }
                   },
                 ),
