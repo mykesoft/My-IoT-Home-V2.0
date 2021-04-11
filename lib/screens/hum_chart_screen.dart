@@ -38,6 +38,20 @@ class _HumChartScreenState extends State<HumChartScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Humidity Graph'),
+        actions: [
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HumChartScreen()),
+              );
+            }),
+            icon: Icon(
+              Icons.refresh,
+            ),
+          ),
+        ],
+        elevation: 5,
       ),
       body: Center(
         child: Column(

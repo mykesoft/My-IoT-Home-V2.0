@@ -71,6 +71,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           children: [
+                            SizedBox(height: 10),
                             SensorCard(
                               sensorIcon: 'thermometer',
                               iconColor: Colors.red,
@@ -113,7 +114,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             Container(
                               child: Column(
                                 children: [
-                                  SizedBox(height: 10),
                                   SensorCard(
                                     sensorIcon: 'camera',
                                     iconColor: Colors.black87,
@@ -145,26 +145,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ? Colors.red
                                       : Colors.green,
                             ),
-                            SizedBox(height: 20),
-                            /*Container(
-                              height: 80,
-                              width: 350,
-                              child: RaisedButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    WebcamScreen.route,
-                                  );
-                                },
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: const Text('Webcam Images',
-                                    style: TextStyle(
-                                        fontSize: 22, color: Colors.white)),
-                                color: Colors.pinkAccent,
-                              ),
-                            ),*/
+                            SizedBox(height: 10),
+                            SensorCard(
+                              sensorIcon: 'home-lightbulb',
+                              iconColor: Colors.black,
+                              sensorType: 'Garage Light',
+                              sensorValue:
+                                  (sensorObj.getGarageLightState() == 1)
+                                      ? "ON"
+                                      : "OFF",
+                              valueColor: Colors.black,
+                            ),
                           ],
                         ),
                       );

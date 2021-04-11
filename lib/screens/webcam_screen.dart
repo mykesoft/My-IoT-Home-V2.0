@@ -87,6 +87,20 @@ class _WebcamScreenState extends State<WebcamScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Webcam images'),
+        actions: [
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => WebcamScreen()),
+              );
+            }),
+            icon: Icon(
+              Icons.refresh,
+            ),
+          ),
+        ],
+        elevation: 5,
       ),
       body: (imagesRetrivered == true)
           ? Center(

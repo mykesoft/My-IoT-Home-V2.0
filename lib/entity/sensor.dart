@@ -6,7 +6,8 @@ class Sensor {
       DHT11IsDown,
       PirIsDown,
       WaterLevelIsDown,
-      WebcamIsDown;
+      WebcamIsDown,
+      GarageLightState;
 
   Sensor(Map<dynamic, dynamic> json) {
     DHT11IsDown = json['Diagnosis']['DHT11IsDown'].round();
@@ -17,12 +18,14 @@ class Sensor {
     humidity = json['DHT11']['humidity'].round();
     waterLevel = json['WaterLevel'];
     pirMotion = json['PirMotion'];
+    GarageLightState = json['GarageLightState'];
 
     if (DHT11IsDown == 1) print("DHT11 is down");
     if (PirIsDown == 1) print("Pir is down");
     if (WaterLevelIsDown == 1) print("WaterLevel is down");
     if (WebcamIsDown == 1) print("Webcam is down");
 
+    print('Garage Light State is: ' + GarageLightState.toString());
     print('Temperature is: ' + temperature.toString() + ' °C');
     print('Humidity is: ' + humidity.toString() + '%');
 
@@ -37,6 +40,10 @@ class Sensor {
 //    this.temperature = temperature;
 //    this.humidity = humidity;
 //  }
+
+  int getGarageLightState() {
+    return GarageLightState;
+  }
 
   int getDHT11IsDown() {
     return DHT11IsDown;
