@@ -151,10 +151,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               iconColor: Colors.black,
                               sensorType: 'Garage Light',
                               sensorValue:
-                                  (sensorObj.getGarageLightState() == 1)
-                                      ? "ON"
-                                      : "OFF",
-                              valueColor: Colors.black,
+                                  (sensorObj.getWaterLevelIsDown() == 1)
+                                      ? "DOWN"
+                                      : (sensorObj.getGarageLightState() == 1)
+                                          ? "ON"
+                                          : "OFF",
+                              valueColor: (sensorObj.getWaterLevelIsDown() == 1)
+                                  ? Colors.orange
+                                  : Colors.black,
                             ),
                           ],
                         ),

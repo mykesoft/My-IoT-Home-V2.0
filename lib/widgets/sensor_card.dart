@@ -111,7 +111,8 @@ class _SensorCardState extends State<SensorCard> {
                 (widget.sensorType == "Temperature" ||
                         widget.sensorType == "Humidity" ||
                         widget.sensorType == "Camera" ||
-                        widget.sensorType == "Garage Light")
+                        (widget.sensorType == "Garage Light" &&
+                            widget.sensorValue != "DOWN"))
                     ? Container(
                         height: 60,
                         width: 60,
