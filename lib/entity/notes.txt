@@ -1,0 +1,31 @@
+// List<DhtLogPoints> dhtLogPoints = [];
+  //int num_of_docs = 0;
+
+  /*fetchData() {
+  bool log_retrivered = false;
+
+    FirebaseFirestore.instance
+        .collection('log_dht11_hum')
+        .get()
+        .then((QuerySnapshot querySnapshot) {
+      num_of_docs = querySnapshot.docs.length;
+      print("there are: " + num_of_docs.toString() + " docs!");
+      querySnapshot.docs.forEach((doc) {
+        print(doc["time"]);
+        print(doc["value"]);
+        DhtLogPoints logpoint =
+            new DhtLogPoints(date: doc["time"], value: doc["value"]);
+        dhtLogPoints.add(logpoint);
+        var leng = dhtLogPoints.length;
+        print("timedata: ");
+        print(dhtLogPoints[leng - 1].getDateStr());
+        print("value: ");
+        print(dhtLogPoints[leng - 1].getValue());
+      });
+    });
+    log_retrivered = true;
+  }*/
+
+
+
+    //fetchData();
