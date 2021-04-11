@@ -6,7 +6,9 @@ import 'package:loading/loading.dart';
 import 'package:my_iot_home/entity/sensor.dart';
 import 'package:my_iot_home/screens/Webcam_screen.dart';
 import 'package:my_iot_home/services/push_notification_service.dart';
-import 'package:my_iot_home/widgets/SensorCard.dart';
+import 'package:my_iot_home/widgets/sensor_card.dart';
+import 'package:my_iot_home/widgets/menu_drawer.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DashboardScreen extends StatefulWidget {
   static String route = "control_screen";
@@ -27,13 +29,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   // See FCM
   startFirebase() async {
     print('verify not');
-    //final prefs = await SharedPreferences.getInstance();
-    //final key = 'notification';
-    //final value = prefs.getInt(key) ?? 0;
-    //if (value == 1) {
-    print('Notification ON');
-    PushNotificationService().initialise(context);
-    //}
+    final prefs = await SharedPreferences.getInstance();
+    final key = 'notification';
+    final value = prefs.getInt(key) ?? 0;
+    if (value == 1) {
+      print('Notification ON');
+      PushNotificationService().initialise(context);
+      PushNotificationService().subscribeAlertNotification(context);
+    } else {
+      PushNotificationService().unsubscribeAlertNotification(context);
+    }
   }
 
   @override
@@ -43,6 +48,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       appBar: AppBar(
         title: Text('Dashboard'),
       ),
+      drawer: MenuDrawer(),
       body: Center(
         child: SingleChildScrollView(
           child: Center(
@@ -90,6 +96,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             SizedBox(height: 10),
                             SensorCard(
+                              sensorIcon: 'motionSensor',
+                              iconColor: Colors.black87,
+                              sensorType: 'Motion sensor',
+                              sensorValue: (sensorObj.getPirIsDown() == 1)
+                                  ? "DOWN"
+                                  : sensorObj.getMotionSersor(),
+                              valueColor: (sensorObj.getPirIsDown() == 1)
+                                  ? Colors.orange
+                                  : (sensorObj.getMotionSersor() == 'DETECTED')
+                                      ? Colors.red
+                                      : Colors.green,
+                            ),
+                            /*(sensorObj.getWebcamIsDown() == 1)
+                                ?*/
+                            Container(
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 10),
+                                  SensorCard(
+                                    sensorIcon: 'camera',
+                                    iconColor: Colors.black87,
+                                    sensorType: 'Camera',
+                                    sensorValue:
+                                        (sensorObj.getWebcamIsDown() == 1)
+                                            ? "DOWN"
+                                            : "OK",
+                                    valueColor:
+                                        (sensorObj.getWebcamIsDown() == 1)
+                                            ? Colors.orange
+                                            : Colors.green,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            SensorCard(
                               sensorIcon: 'homeFlood',
                               iconColor: Colors.black87,
                               sensorType: 'Garage flooding',
@@ -103,38 +145,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       ? Colors.red
                                       : Colors.green,
                             ),
-                            SizedBox(height: 10),
-                            SensorCard(
-                              sensorIcon: 'motionSensor',
-                              iconColor: Colors.black87,
-                              sensorType: 'Motion sensor',
-                              sensorValue: (sensorObj.getPirIsDown() == 1)
-                                  ? "DOWN"
-                                  : sensorObj.getMotionSersor(),
-                              valueColor: (sensorObj.getPirIsDown() == 1)
-                                  ? Colors.orange
-                                  : (sensorObj.getMotionSersor() == 'DETECTED')
-                                      ? Colors.red
-                                      : Colors.green,
-                            ),
-                            (sensorObj.getWebcamIsDown() == 1)
-                                ? Container(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: 10),
-                                        SensorCard(
-                                          sensorIcon: 'camera',
-                                          iconColor: Colors.black87,
-                                          sensorType: 'Camera',
-                                          sensorValue: "DOWN",
-                                          valueColor: Colors.orange,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Container(),
                             SizedBox(height: 20),
-                            Container(
+                            /*Container(
                               height: 80,
                               width: 350,
                               child: RaisedButton(
@@ -152,7 +164,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                         fontSize: 22, color: Colors.white)),
                                 color: Colors.pinkAccent,
                               ),
-                            ),
+                            ),*/
                           ],
                         ),
                       );

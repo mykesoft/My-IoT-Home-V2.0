@@ -45,24 +45,27 @@ class _WebcamScreenState extends State<WebcamScreen> {
       setState(() {
         retriveredUrl;
         //Ad CloudImage obj to list of objs
-        CloudImage temp = (CloudImage(date: ref.fullPath, url: retriveredUrl));
-        print('url image: ' + temp.getUrl());
-        print("cont: " + cont.toString());
-        cont++;
-        imagesArr.add(temp);
-        print('there are" ' + imagesArr.length.toString() + " images");
+        if (!retriveredUrl.contains("log")) {
+          CloudImage temp =
+              (CloudImage(date: ref.fullPath, url: retriveredUrl));
+          print('url image: ' + temp.getUrl());
+          print("cont: " + cont.toString());
+          cont++;
+          imagesArr.add(temp);
+          print('there are" ' + imagesArr.length.toString() + " images");
 
-        imagesArr.sort((a, b) => a.getDate().compareTo(b.getDate()));
+          imagesArr.sort((a, b) => a.getDate().compareTo(b.getDate()));
 
-        print("dati");
-        for (int i = 0; i < imagesArr.length; i++) {
-          print(imagesArr[i].getDateStr());
+          print("dati");
+          for (int i = 0; i < imagesArr.length; i++) {
+            print(imagesArr[i].getDateStr());
+          }
+
+          //ordinato dal più recente al più datato
+          imagesArr = imagesArr.reversed.toList();
+
+          imagesRetrivered = true;
         }
-
-        //ordinato dal più recente al più datato
-        imagesArr = imagesArr.reversed.toList();
-
-        imagesRetrivered = true;
       });
       // Image.network(downloadURL);
     });

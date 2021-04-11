@@ -71,11 +71,11 @@ class PushNotificationService {
     );
   }
 
-//  subscribeWpNotification(context) async {
-//    _fcm.subscribeToTopic('wp');
-//  }
-//
-//  unsubscribeWpNotification(context) async {
-//    _fcm.unsubscribeFromTopic('wp');
-//  }
+  subscribeAlertNotification(context) async {
+    _fcm.subscribeToTopic('alert');
+  }
+
+  unsubscribeAlertNotification(context) async {
+    _fcm.unsubscribeFromTopic('alert');
+  }
 }
