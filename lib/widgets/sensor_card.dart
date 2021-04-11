@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -5,7 +6,7 @@ import 'package:my_iot_home/screens/hum_chart_screen.dart';
 import 'package:my_iot_home/screens/temp_chart_screen.dart';
 import 'package:my_iot_home/screens/webcam_screen.dart';
 
-class SensorCard extends StatelessWidget {
+class SensorCard extends StatefulWidget {
   const SensorCard({
     Key key,
     @required this.sensorIcon,
@@ -22,6 +23,26 @@ class SensorCard extends StatelessWidget {
   final Color valueColor;
 
   @override
+  _SensorCardState createState() => _SensorCardState();
+}
+
+class _SensorCardState extends State<SensorCard> {
+  final databaseRef =
+      FirebaseDatabase.instance.reference(); //database reference object
+
+  void ToggleGarageLigth(String sensorVal) async {
+    int newVal;
+
+    if (sensorVal == "ON")
+      newVal = 0;
+    else
+      newVal = 1;
+
+    print("test");
+    databaseRef.child('GarageLightState').set(newVal);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -34,22 +55,22 @@ class SensorCard extends StatelessWidget {
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
             child: Row(
-              mainAxisAlignment: (sensorType == "Temperature" ||
-                      sensorType == "Humidity" ||
-                      sensorType == "Camera")
+              mainAxisAlignment: (widget.sensorType == "Temperature" ||
+                      widget.sensorType == "Humidity" ||
+                      widget.sensorType == "Camera")
                   ? MainAxisAlignment.spaceAround
                   : MainAxisAlignment.center,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.6,
+                  width: MediaQuery.of(context).size.width * 0.64,
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(
-                            MdiIcons.fromString(sensorIcon),
-                            color: iconColor,
+                            MdiIcons.fromString(widget.sensorIcon),
+                            color: widget.iconColor,
                             size: 28.0,
                             semanticLabel:
                                 'Text to announce in accessibility modes',
@@ -58,7 +79,7 @@ class SensorCard extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                            sensorType,
+                            widget.sensorType,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
@@ -74,12 +95,12 @@ class SensorCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            sensorValue,
+                            widget.sensorValue,
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 22,
                               fontFamily: 'Orbitron',
-                              color: valueColor,
+                              color: widget.valueColor,
                             ),
                           ),
                         ],
@@ -87,44 +108,69 @@ class SensorCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                (sensorType == "Temperature" ||
-                        sensorType == "Humidity" ||
-                        sensorType == "Camera")
+                (widget.sensorType == "Temperature" ||
+                        widget.sensorType == "Humidity" ||
+                        widget.sensorType == "Camera" ||
+                        widget.sensorType == "Garage Light")
                     ? Container(
                         height: 60,
                         width: 60,
                         child: FlatButton(
                           onPressed: () => {
-                            (sensorType == "Temperature")
+                            (widget.sensorType == "Temperature")
                                 ? Navigator.pushNamed(
                                     context,
                                     TempChartScreen.route,
                                   )
-                                : (sensorType == "Humidity")
+                                : (widget.sensorType == "Humidity")
                                     ? Navigator.pushNamed(
                                         context,
                                         HumChartScreen.route,
                                       )
-                                    : Navigator.pushNamed(
-                                        context,
-                                        WebcamScreen.route,
-                                      )
+                                    : (widget.sensorType == "Camera")
+                                        ? Navigator.pushNamed(
+                                            context,
+                                            WebcamScreen.route,
+                                          )
+                                        : (widget.sensorType == "Garage Light")
+                                            ? ToggleGarageLigth(
+                                                widget.sensorValue)
+                                            /*FirebaseDatabase.instance
+                                                .reference()
+                                                .push()
+                                                .set({
+                                                'GarageLightState': 1
+                                              })*/ //database reference object
+
+                                            : null
                           },
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          color: (sensorType == "Temperature" ||
-                                  sensorType == "Humidity")
+                          color: (widget.sensorType == "Temperature" ||
+                                  widget.sensorType == "Humidity")
                               ? Colors.blueAccent
-                              : Colors.pinkAccent,
+                              : (widget.sensorType == "Camera")
+                                  ? Colors.pinkAccent
+                                  : (widget.sensorType == "Garage Light")
+                                      ? Colors.blueGrey[800]
+                                      : Colors.white,
                           padding: EdgeInsets.symmetric(vertical: 0),
                           child: Icon(
-                            (sensorType == "Temperature" ||
-                                    sensorType == "Humidity")
+                            (widget.sensorType == "Temperature" ||
+                                    widget.sensorType == "Humidity")
                                 ? Icons.show_chart
-                                : Icons.photo,
-                            size: 50,
-                            color: Colors.white,
+                                : (widget.sensorType == "Camera")
+                                    ? Icons.photo
+                                    : (widget.sensorType == "Garage Light" &&
+                                            widget.sensorValue == "ON")
+                                        ? MdiIcons.lightbulbOn
+                                        : MdiIcons.lightbulb,
+                            size: 46,
+                            color: (widget.sensorType == "Garage Light" &&
+                                    widget.sensorValue == "ON")
+                                ? Colors.yellowAccent
+                                : Colors.white,
                           ),
                         ),
                       )

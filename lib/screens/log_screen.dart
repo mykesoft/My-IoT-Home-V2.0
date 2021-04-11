@@ -132,6 +132,20 @@ class _LogScreenState extends State<LogScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Log File Text'),
+        actions: [
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => LogScreen()),
+              );
+            }),
+            icon: Icon(
+              Icons.refresh,
+            ),
+          ),
+        ],
+        elevation: 5,
       ),
       body: (LogRetrivered == true)
           ? Center(

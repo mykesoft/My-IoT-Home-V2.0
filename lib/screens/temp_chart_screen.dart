@@ -38,6 +38,20 @@ class _TempChartScreenState extends State<TempChartScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Temperature Graph'),
+        actions: [
+          IconButton(
+            onPressed: () => setState(() {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => TempChartScreen()),
+              );
+            }),
+            icon: Icon(
+              Icons.refresh,
+            ),
+          ),
+        ],
+        elevation: 5,
       ),
       body: Center(
         child: Column(
