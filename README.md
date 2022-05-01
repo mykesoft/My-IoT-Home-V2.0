@@ -1,16 +1,24 @@
-# my_iot_home
+# My IoT Home V2.0
 
-A new Flutter application.
+## Introduzione
 
-## Getting Started
+![alt text](./images/Slides/My_IoT_Home_V2.01.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.02.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.03.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.04.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.05.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.06.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.07.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.08.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.09.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.10.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.11.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.12.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.13.jpg)
+![alt text](./images/Slides/My_IoT_Home_V2.14.jpg)
 
-This project is a starting point for a Flutter application.
+## Elaborato e fasi di progettazione
 
-A few resources to get you started if this is your first Flutter project:
+![alt text](./documentation/elaborate.pdf)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[embed]./documentation/elaborate.pdf[/embed]
